@@ -25,7 +25,7 @@ class BookModel extends BookEntity {
     this.accessInfo,
     this.searchInfo,
   }) : super(
-            // bookId: id!,
+            bookId: id!,
             image: volumeInfo?.imageLinks?.thumbnail ?? '',
             authorName: volumeInfo?.authors?.first ?? 'No Name',
             price: 0.0,
@@ -61,4 +61,15 @@ class BookModel extends BookEntity {
         'accessInfo': accessInfo?.toJson(),
         'searchInfo': searchInfo?.toJson(),
       };
+
+  BookEntity toEntity() {
+    return BookEntity(
+      bookId: id ?? '',
+      image: volumeInfo?.imageLinks?.thumbnail ?? '',
+      authorName: volumeInfo?.authors?.first ?? 'No Name',
+      price: 0.0,
+      rating: volumeInfo!.averageRating ?? 0.0,
+      title: volumeInfo?.title ?? "No Title",
+    );
+  }
 }
